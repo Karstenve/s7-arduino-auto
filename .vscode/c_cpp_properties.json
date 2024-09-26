@@ -8,10 +8,12 @@
         {
             "name": "PlatformIO",
             "includePath": [
-                "C:/Users/karst/Documents/GitHub/S7 Arduino Auto/include",
-                "C:/Users/karst/Documents/GitHub/S7 Arduino Auto/src",
+                "C:/Users/karst/Documents/GitHub/s7-arduino-auto/include",
+                "C:/Users/karst/Documents/GitHub/s7-arduino-auto/src",
                 "C:/Users/karst/.platformio/packages/framework-arduino-avr/cores/arduino",
                 "C:/Users/karst/.platformio/packages/framework-arduino-avr/variants/standard",
+                "C:/Users/karst/Documents/GitHub/s7-arduino-auto/lib/Pixy2",
+                "C:/Users/karst/.platformio/lib/arduino_pixy2-1",
                 "C:/Users/karst/.platformio/packages/framework-arduino-avr/libraries/EEPROM/src",
                 "C:/Users/karst/.platformio/packages/framework-arduino-avr/libraries/HID/src",
                 "C:/Users/karst/.platformio/packages/framework-arduino-avr/libraries/SPI/src",
@@ -22,10 +24,12 @@
             "browse": {
                 "limitSymbolsToIncludedHeaders": true,
                 "path": [
-                    "C:/Users/karst/Documents/GitHub/S7 Arduino Auto/include",
-                    "C:/Users/karst/Documents/GitHub/S7 Arduino Auto/src",
+                    "C:/Users/karst/Documents/GitHub/s7-arduino-auto/include",
+                    "C:/Users/karst/Documents/GitHub/s7-arduino-auto/src",
                     "C:/Users/karst/.platformio/packages/framework-arduino-avr/cores/arduino",
                     "C:/Users/karst/.platformio/packages/framework-arduino-avr/variants/standard",
+                    "C:/Users/karst/Documents/GitHub/s7-arduino-auto/lib/Pixy2",
+                    "C:/Users/karst/.platformio/lib/arduino_pixy2-1",
                     "C:/Users/karst/.platformio/packages/framework-arduino-avr/libraries/EEPROM/src",
                     "C:/Users/karst/.platformio/packages/framework-arduino-avr/libraries/HID/src",
                     "C:/Users/karst/.platformio/packages/framework-arduino-avr/libraries/SPI/src",
