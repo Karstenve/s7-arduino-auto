@@ -11,12 +11,12 @@
 #define MotorBBrakePin 8
 
 // Motor A Constants
-int MotorASpeed = 255;
+int MotorASpeed = 0;
 int MotorADirection = HIGH;
 int MotorABrake = LOW;
 
 // Motor B Constants
-int MotorBSpeed = 255;
+int MotorBSpeed = 0;
 int MotorBDirection = HIGH;
 int MotorBBrake = LOW;
 
@@ -37,16 +37,16 @@ void setup()
   
   // Init Motor B
   analogWrite(MotorASpeedPin, MotorASpeed);
-  pinMode(MotorADirectionPin, OUTPUT); //Initiates Motor Channel A direction pin
+  pinMode(MotorADirectionPin, OUTPUT);
   digitalWrite(MotorADirectionPin, MotorADirection);
-  pinMode(MotorABrakePin, OUTPUT); //Initiates Motor Channel A brake pin
+  pinMode(MotorABrakePin, OUTPUT);
   digitalWrite(MotorABrakePin, MotorABrake);
 
   // Init Motor B
   analogWrite(MotorBSpeedPin, MotorBSpeed);
-  pinMode(MotorBDirectionPin, OUTPUT); //Initiates Motor Channel B direction pin
+  pinMode(MotorBDirectionPin, OUTPUT);
   digitalWrite(MotorBDirectionPin, MotorBDirection);
-  pinMode(MotorBBrakePin, OUTPUT); //Initiates Motor Channel B brake pin
+  pinMode(MotorBBrakePin, OUTPUT);
   digitalWrite(MotorBBrakePin, MotorBBrake);
 
   // Init Pixy
