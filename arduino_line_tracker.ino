@@ -1,3 +1,5 @@
+#include <Pixy2.h>
+
 // Motor A Pins
 #define MotorASpeedPin 3
 #define MotorADirectionPin 12
@@ -18,9 +20,14 @@ int MotorBSpeed = 255;
 int MotorBDirection = HIGH;
 int MotorBBrake = LOW;
 
-// #include <Pixy2.h>
+// Init pixy cam 2
+Pixy2 pixy;
 
-// Pixy2 pixy;
+// Pixy vector coordinates
+int ArrowSideX = 0;
+int ArrowSideY = 0;
+int LineSideX = 0;
+int LineSideY = 0;
 
 void setup()
 {
@@ -42,16 +49,22 @@ void setup()
   pinMode(MotorBBrakePin, OUTPUT); //Initiates Motor Channel B brake pin
   digitalWrite(MotorBBrakePin, MotorBBrake);
 
-  //pixy.init();
-  // change to the line_tracking program.  Note, changeProg can use partial strings, so for example,
-  // you can change to the line_tracking program by calling changeProg("line") instead of the whole
-  // string changeProg("line_tracking")
-  //Serial.println(pixy.changeProg("line"));
-
+  // Init Pixy
+  pixy.init();
 }
 
 void loop()
 {
 
+  // Get Pixy vectors
+  pixy.line.getMainFeatures(1,true);
+
+  ArrowSideX = pixy.line.vectors -> m_x0;
+  ArrowSideY = pixy.line.vectors -> m_y0;
+  LineSideX = pixy.line.vectors -> m_x1;
+  LineSideY = pixy.line.vectors -> m_y1;
+
+  // Print Pixy vector coordinates
+  Serial.println("Arrow Side: (" + String(ArrowSideX) + "," + String(ArrowSideY) + "); Line Side: (" + String(LineSideX) + "," + String(LineSideY) + ")");
 
 }
