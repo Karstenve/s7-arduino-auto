@@ -66,6 +66,9 @@ void loop()
   // Get Pixy vector
   pixy.line.getMainFeatures(1,true);
 
+  // Arrow side = positive side of the vector
+  // Line side = negative side of the vector
+
   // Get Pixy vector coordinates using callback (sends request, then waits for reply using callback sign '->') 
   ArrowSideX = pixy.line.vectors -> m_x0;
   ArrowSideY = pixy.line.vectors -> m_y0;
