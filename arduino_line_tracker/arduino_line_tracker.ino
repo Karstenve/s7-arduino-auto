@@ -1,5 +1,8 @@
 #include <Pixy2.h>
 
+// Motor A = Left
+// Motor B = Right
+
 // Motor A Pins
 #define MotorASpeedPin 3
 #define MotorADirectionPin 12
@@ -9,6 +12,10 @@
 #define MotorBSpeedPin 11
 #define MotorBDirectionPin 13
 #define MotorBBrakePin 8
+
+// Speed: 0-255
+// Direction: High is forwards, LOW is reverse
+// Brake: LOW is not applied, HIGH is applied
 
 // Motor A Constants
 int MotorASpeed = 0;
@@ -20,7 +27,7 @@ int MotorBSpeed = 0;
 int MotorBDirection = HIGH;
 int MotorBBrake = LOW;
 
-// Init pixy cam 2
+// Init Pixy cam 
 Pixy2 pixy;
 
 // Pixy vector coordinates
@@ -56,9 +63,10 @@ void setup()
 void loop()
 {
 
-  // Get Pixy vectors
+  // Get Pixy vector
   pixy.line.getMainFeatures(1,true);
 
+  // Get Pixy vector coordinates using callback (sends request, then waits for reply using callback sign '->') 
   ArrowSideX = pixy.line.vectors -> m_x0;
   ArrowSideY = pixy.line.vectors -> m_y0;
   LineSideX = pixy.line.vectors -> m_x1;
@@ -66,5 +74,4 @@ void loop()
 
   // Print Pixy vector coordinates
   Serial.println("Arrow Side: (" + String(ArrowSideX) + "," + String(ArrowSideY) + "); Line Side: (" + String(LineSideX) + "," + String(LineSideY) + ")");
-
 }
