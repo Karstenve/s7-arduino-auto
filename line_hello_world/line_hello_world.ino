@@ -26,14 +26,16 @@ void setup()
   Serial.begin(115200);
   Serial.print("Starting...\n");
   
-  
-  //Setup Channel A
-  pinMode(12, OUTPUT); //Initiates Motor Channel A pin
-  pinMode(9, OUTPUT); //Initiates Brake Channel A pin
 
-  //Setup Channel B
-  pinMode(13, OUTPUT); //Initiates Motor Channel A pin
-  pinMode(8, OUTPUT);  //Initiates Brake Channel A pin
+  pinMode(12, OUTPUT); //Initiates Motor Channel A direction pin
+  digitalWrite(12, HIGH);
+  pinMode(9, OUTPUT); //Initiates Motor Channel A brake pin
+  digitalWrite(9, LOW);
+
+  pinMode(13, OUTPUT); //Initiates Motor Channel B direction pin
+  digitalWrite(13, HIGH);
+  pinMode(8, OUTPUT); //Initiates Motor Channel B brake pin
+  digitalWrite(8, LOW);
 
   //pixy.init();
   // change to the line_tracking program.  Note, changeProg can use partial strings, so for example,
@@ -55,17 +57,8 @@ void loop()
  //   }
 //#########################
 
-
-  //Motor A forward @ full speed
-  digitalWrite(12, HIGH); //Establishes forward direction of Channel A
-  digitalWrite(9, LOW);   //Disengage the Brake for Channel A
-  analogWrite(3, 255);   //Spins the motor on Channel A at full speed
-
-  //Motor B backward @ half speed
-  digitalWrite(13, HIGH);  //Establishes backward direction of Channel B
-  digitalWrite(8, LOW);   //Disengage the Brake for Channel B
-  analogWrite(11, 255);    //Spins the motor on Channel B at half spee
-  
+  analogWrite(ApwmPin, 255); //motor A go brrt
+  analogWrite(BpwmPin, 255);
 
 //#########################
 
