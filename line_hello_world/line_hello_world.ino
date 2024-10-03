@@ -13,6 +13,18 @@
 // end license header
 //
 
+
+int AdirectionPin = 12;
+int ApwmPin = 3;
+int AbrakePin = 9;
+int BdirectionPin = 13;
+int BpwmPin = 11;
+int BbrakePin = 8;
+
+bool AdirectionState;
+bool BdirectionState;
+
+
 #include <Pixy2.h>
 
 Pixy2 pixy;
@@ -22,11 +34,22 @@ void setup()
   Serial.begin(115200);
   Serial.print("Starting...\n");
 
+  pinMode(AdirectionPin, OUTPUT);
+  pinMode(ApwmPin, OUTPUT);
+  pinMode(AbrakePin, OUTPUT);
+  pinMode(BdirectionPin, OUTPUT);
+  pinMode(BpwmPin, OUTPUT);
+  pinMode(BbrakePin, OUTPUT);
+
   pixy.init();
   // change to the line_tracking program.  Note, changeProg can use partial strings, so for example,
   // you can change to the line_tracking program by calling changeProg("line") instead of the whole
   // string changeProg("line_tracking")
   Serial.println(pixy.changeProg("line"));
+
+
+  BdirectionState = !BdirectionState;
+
 }
 
 void loop()
@@ -44,5 +67,59 @@ void loop()
 
   if (pixy.line.barcodes)
     pixy.line.barcodes->print();
+
+
+//#########################
+
+
+//change direction every loop()
+
+AdirectionState = !AdirectionState;
+BdirectionState = !BdirectionState;
+
+if(AdirectionState == false){
+
+  digitalWrite(AdirectionPin, LOW);
+
+} else{
+
+  digitalWrite(AdirectionPin, HIGH);
+
+}
+
+if(BdirectionState == false){
+
+  digitalWrite(BdirectionPin, LOW);
+
+} else{
+
+  digitalWrite(BdirectionPin, LOW);
+
+}
+
+
+//release breaks
+
+digitalWrite(AbrakePin, LOW);
+digitalWrite(BbrakePin, LOW);
+analogWrite(pwmPin, 30);
+
+delay(2000);
+
+
+digitalWrite(AbrakePin, HIGH);
+digitalWrite(BbrakePin, HIGH);
+analogWrite(pwmPin, 0);
+
+delay(2000);
+
+
+
+//#########################
+    
+
+
+
+
 
 }
