@@ -41,7 +41,7 @@ void setup()
   digitalWrite(AbrakePin, LOW);
   digitalWrite(BbrakePin, LOW);
   digitalWrite(AdirectionPin, HIGH);
-  digitalWrite(AdirectionPin, HIGH);
+  digitalWrite(BdirectionPin, HIGH);
 
   pixy.init();
   // change to the line_tracking program.  Note, changeProg can use partial strings, so for example,
@@ -66,12 +66,12 @@ void loop()
 analogWrite(ApwmPin, 254);
 analogWrite(BpwmPin, 254);
 
-
+delay(1000);
 
 analogWrite(ApwmPin, 0);
 analogWrite(BpwmPin, 0);
 
-
+delay(1000);
 
 //#########################
     
