@@ -21,10 +21,6 @@ int BdirectionPin = 13;
 int BpwmPin = 11;
 int BbrakePin = 8;
 
-bool AdirectionState;
-bool BdirectionState;
-
-
 #include <Pixy2.h>
 
 Pixy2 pixy;
@@ -41,14 +37,17 @@ void setup()
   pinMode(BpwmPin, OUTPUT);
   pinMode(BbrakePin, OUTPUT);
 
+  
+  digitalWrite(AbrakePin, LOW);
+  digitalWrite(BbrakePin, LOW);
+  digitalWrite(AdirectionPin, LOW);
+  digitalWrite(AdirectionPin, LOW);
+
   pixy.init();
   // change to the line_tracking program.  Note, changeProg can use partial strings, so for example,
   // you can change to the line_tracking program by calling changeProg("line") instead of the whole
   // string changeProg("line_tracking")
   Serial.println(pixy.changeProg("line"));
-
-
-  BdirectionState = !BdirectionState; //is leuk om niet beide dezelfde kant uit te beginnen ofzo
 
 }
 
@@ -72,48 +71,17 @@ void loop()
 //#########################
 
 
-//change direction every loop()
-
-AdirectionState = !AdirectionState;
-BdirectionState = !BdirectionState;
-
-if(AdirectionState == false){
-
-  digitalWrite(AdirectionPin, LOW);
-
-} else{
-
-  digitalWrite(AdirectionPin, HIGH);
-
-}
-
-if(BdirectionState == false){
-
-  digitalWrite(BdirectionPin, LOW);
-
-} else{
-
-  digitalWrite(BdirectionPin, HIGH);
-
-}
-
-
 //release breaks
 
-digitalWrite(AbrakePin, LOW);
-digitalWrite(BbrakePin, LOW);
 analogWrite(ApwmPin, 254);
 analogWrite(BpwmPin, 254);
 
 delay(2000);
 
-
-digitalWrite(AbrakePin, HIGH);
-digitalWrite(BbrakePin, HIGH);
+analogWrite(ApwmPin, 0);
+analogWrite(BpwmPin, 0);
 
 delay(2000);
-
-
 
 //#########################
     
