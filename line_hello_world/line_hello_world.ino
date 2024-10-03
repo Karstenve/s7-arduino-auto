@@ -48,7 +48,7 @@ void setup()
   Serial.println(pixy.changeProg("line"));
 
 
-  BdirectionState = !BdirectionState;
+  BdirectionState = !BdirectionState; //is leuk om niet beide dezelfde kant uit te beginnen ofzo
 
 }
 
@@ -102,14 +102,14 @@ if(BdirectionState == false){
 
 digitalWrite(AbrakePin, LOW);
 digitalWrite(BbrakePin, LOW);
-analogWrite(pwmPin, 30);
+analogWrite(ApwmPin, 30);
 
 delay(2000);
 
 
 digitalWrite(AbrakePin, HIGH);
 digitalWrite(BbrakePin, HIGH);
-analogWrite(pwmPin, 0);
+analogWrite(BpwmPin, 0);
 
 delay(2000);
 
