@@ -56,22 +56,22 @@ void loop()
   int8_t i;
   char buf[128];
  
-  pixy.line.getMainFeatures(1,true);
+  pixy.line.getMainFeatures(1,false);
 
-  if (pixy.line.numVectors)
+  if (pixy.line.numVectors) {
     pixy.line.vectors->print();
- 
+    }
 //#########################
 
 analogWrite(ApwmPin, 254);
 analogWrite(BpwmPin, 254);
 
-delay(2000);
+
 
 analogWrite(ApwmPin, 0);
 analogWrite(BpwmPin, 0);
 
-delay(2000);
+
 
 //#########################
     
