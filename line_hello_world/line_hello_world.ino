@@ -93,7 +93,7 @@ if(BdirectionState == false){
 
 } else{
 
-  digitalWrite(BdirectionPin, LOW);
+  digitalWrite(BdirectionPin, HIGH);
 
 }
 
@@ -102,14 +102,14 @@ if(BdirectionState == false){
 
 digitalWrite(AbrakePin, LOW);
 digitalWrite(BbrakePin, LOW);
-analogWrite(ApwmPin, 30);
+analogWrite(ApwmPin, 254);
 
 delay(2000);
 
 
 digitalWrite(AbrakePin, HIGH);
 digitalWrite(BbrakePin, HIGH);
-analogWrite(BpwmPin, 0);
+analogWrite(BpwmPin, 254);
 
 delay(2000);
 
