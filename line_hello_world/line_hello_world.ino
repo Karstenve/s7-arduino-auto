@@ -56,18 +56,11 @@ void loop()
   int8_t i;
   char buf[128];
  
-  pixy.line.getMainFeatures();
+  pixy.line.getMainFeatures(1,true);
 
   if (pixy.line.numVectors)
     pixy.line.vectors->print();
  
-  if (pixy.line.numIntersections)
-    pixy.line.intersections->print();
-
-  if (pixy.line.barcodes)
-    pixy.line.barcodes->print();
-
-
 //#########################
 
 
