@@ -1,3 +1,3 @@
-# Semester 7 ASN Fontys Automotive Eindhoven
+# Semester 7 Arduino Fontys Automotive Eindhoven
 
-Arduino project voor een autotje die een lijn moet tracken maar dan op de goede manier.
+Alleen maar lijntjes
