@@ -62,6 +62,12 @@ void setup()
   // Init Pixy
   pixy.init();
   pixy.setLamp(1, 1);
+
+  //Disable zumomotor library
+  #define PWM_L 3
+  #define PWM_R 3
+  #define DIR_L 3
+  #define DIR_R 3
 }
 
 void loop()
