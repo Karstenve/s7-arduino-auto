@@ -58,6 +58,7 @@ void setup()
 
   // Init Pixy
   pixy.init();
+  pixy.setLamp(1, 1);
 }
 
 void loop()
