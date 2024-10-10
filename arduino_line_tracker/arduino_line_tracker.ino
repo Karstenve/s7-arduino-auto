@@ -32,6 +32,9 @@ int ArrowSideY = 0;
 int LineSideX = 0;
 int LineSideY = 0;
 
+// Number of vectors
+int VectorAmount = 0;
+
 void setup()
 {
   // Init Serial
@@ -55,7 +58,7 @@ void loop()
 {
 /*
   // Get Pixy vector
-  pixy.line.getMainFeatures(1,true);
+  pixy.line.getAllFeatures(1,true);
 
   // Arrow side = positive side of the vector
   // Line side = negative side of the vector
@@ -65,11 +68,10 @@ void loop()
   ArrowSideY = pixy.line.vectors -> m_y0;
   LineSideX = pixy.line.vectors -> m_x1;
   LineSideY = pixy.line.vectors -> m_y1;
+  
+  // Amount of vectors detected by pixycam
+  VectorAmount = pixy.line.numVectors;
 
   // Print Pixy vector coordinates
   Serial.println("Arrow Side: (" + String(ArrowSideX) + "," + String(ArrowSideY) + "); Line Side: (" + String(LineSideX) + "," + String(LineSideY) + ")");
-*/
-  analogWrite(MotorASpeedPin, 0);
-  analogWrite(MotorBSpeedPin, 0);
-
 }
