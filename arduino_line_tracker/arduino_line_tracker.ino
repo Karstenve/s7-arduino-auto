@@ -4,14 +4,10 @@
 // Motor B = Right
 
 // Motor A Pins
-#define MotorASpeedPin 3
-#define MotorADirectionPin 12
-#define MotorABrakePin 9
+#define MotorASpeedPin 6
 
 // Motor B Pins
-#define MotorBSpeedPin 11
-#define MotorBDirectionPin 13
-#define MotorBBrakePin 8
+#define MotorBSpeedPin 5
 
 // Speed: 0-255
 // Direction: High is forwards, LOW is reverse
@@ -43,33 +39,21 @@ void setup()
   Serial.print("Starting...\n");
   
   // Init Motor B
+  pinMode(MotorASpeedPin, OUTPUT);
   analogWrite(MotorASpeedPin, MotorASpeed);
-  pinMode(MotorADirectionPin, OUTPUT);
-  digitalWrite(MotorADirectionPin, MotorADirection);
-  pinMode(MotorABrakePin, OUTPUT);
-  digitalWrite(MotorABrakePin, MotorABrake);
 
   // Init Motor B
+  pinMode(MotorBSpeedPin, OUTPUT);
   analogWrite(MotorBSpeedPin, MotorBSpeed);
-  pinMode(MotorBDirectionPin, OUTPUT);
-  digitalWrite(MotorBDirectionPin, MotorBDirection);
-  pinMode(MotorBBrakePin, OUTPUT);
-  digitalWrite(MotorBBrakePin, MotorBBrake);
 
   // Init Pixy
-  pixy.init();
-  pixy.setLamp(1, 1);
-
-  //Disable zumomotor library
-  #define PWM_L 3
-  #define PWM_R 3
-  #define DIR_L 3
-  #define DIR_R 3
+  //pixy.init();
+  //pixy.setLamp(1, 1);
 }
 
 void loop()
 {
-
+/*
   // Get Pixy vector
   pixy.line.getMainFeatures(1,true);
 
@@ -84,4 +68,8 @@ void loop()
 
   // Print Pixy vector coordinates
   Serial.println("Arrow Side: (" + String(ArrowSideX) + "," + String(ArrowSideY) + "); Line Side: (" + String(LineSideX) + "," + String(LineSideY) + ")");
+*/
+  analogWrite(MotorASpeedPin, 0);
+  analogWrite(MotorBSpeedPin, 0);
+
 }
