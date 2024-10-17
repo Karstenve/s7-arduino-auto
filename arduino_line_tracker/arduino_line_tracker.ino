@@ -1,35 +1,36 @@
 #include <Pixy2.h>
 
-// Motor A = Left
-// Motor B = Right
+// Right Motor Pin
+#define MotorRSpeedPin 5
 
-// Motor A Pins
-#define MotorASpeedPin 6
-
-// Motor B Pins
-#define MotorBSpeedPin 5
+// Left Motor Pin
+#define MotorLSpeedPin 6
 
 // Speed: 0-255
 // Direction: High is forwards, LOW is reverse
 // Brake: LOW is not applied, HIGH is applied
 
-// Motor A Constants
-int MotorASpeed = 145;
+int MaxSpeed = 100;
+int MinSpeed = 0;
+int MaxDelta = 5000;
+int Kp = 10;
+int Deadzone = 0;
 
-// Motor B Constants
-int MotorBSpeed = 145;
+// Init speed
+int MotorRSpeed = MaxSpeed;
+int MotorLSpeed = MaxSpeed;
+
+// X heading
+int DeltaX = 0;
 
 // Init Pixy cam 
 Pixy2 pixy;
 
 // Pixy vector coordinates
-int ArrowSideX = 0;
-int ArrowSideY = 0;
-int LineSideX = 0;
-int LineSideY = 0;
-
-// Number of vectors
-int VectorAmount = 0;
+int ArrowSideX;
+int ArrowSideY;
+int LineSideX;
+int LineSideY;
 
 void setup()
 {
@@ -37,13 +38,13 @@ void setup()
   Serial.begin(115200);
   Serial.print("Starting...\n");
   
-  // Init Motor B
-  pinMode(MotorASpeedPin, OUTPUT);
-  analogWrite(MotorASpeedPin, MotorASpeed);
+  // Init Motor R
+  pinMode(MotorRSpeedPin, OUTPUT);
+  analogWrite(MotorRSpeedPin, MotorRSpeed);
 
-  // Init Motor B
-  pinMode(MotorBSpeedPin, OUTPUT);
-  analogWrite(MotorBSpeedPin, MotorBSpeed);
+  // Init Motor L
+  pinMode(MotorLSpeedPin, OUTPUT);
+  analogWrite(MotorLSpeedPin, MotorLSpeed);
 
   // Init Pixy
   pixy.init();
@@ -52,7 +53,6 @@ void setup()
 
 void loop()
 {
-
   // Get Pixy vector
   pixy.line.getMainFeatures(1,true);
 
@@ -64,11 +64,45 @@ void loop()
   ArrowSideY = pixy.line.vectors -> m_y0;
   LineSideX = pixy.line.vectors -> m_x1;
   LineSideY = pixy.line.vectors -> m_y1;
-  
-  // Amount of vectors detected by pixycam
-  VectorAmount = pixy.line.numVectors;
 
-  // Print Pixy vector coordinates
-  Serial.println("Arrow Side: (" + String(ArrowSideX) + "," + String(ArrowSideY) + "); Line Side: (" + String(LineSideX) + "," + String(LineSideY) + ")");
+  // Delta X position between arrow side and line side times a scaling coefficient
+  DeltaX = (LineSideX - ArrowSideX) * Kp;
 
+  // Maxdelta limits
+  if (DeltaX > MaxDelta | DeltaX < (-1 * MaxDelta)) {
+    DeltaX = 0;
+  }
+
+  // Deadzone limits
+  if (DeltaX > (-1 * Deadzone) && DeltaX < Deadzone) {
+    DeltaX = 0;
+  }
+
+  // Speed logic
+  if (DeltaX > 0) {
+    MotorRSpeed = MaxSpeed - DeltaX;
+    MotorLSpeed = MaxSpeed;
+  } else if (DeltaX < 0) {
+    MotorLSpeed = MaxSpeed + DeltaX;
+    MotorRSpeed = MaxSpeed;
+  } else {
+    MotorRSpeed = MaxSpeed;
+    MotorLSpeed = MaxSpeed;
+  }
+
+  // Right speed minimum
+  if (MotorRSpeed < MinSpeed) {
+    MotorRSpeed = MinSpeed;
+  }
+
+  // Left speed minimum
+  if (MotorLSpeed < MinSpeed) {
+    MotorLSpeed = MinSpeed;
+  }
+
+  // Set motor speed 
+  analogWrite(MotorRSpeedPin, MotorRSpeed);
+  analogWrite(MotorLSpeedPin, MotorLSpeed);
+
+  Serial.println("Delta: (" + String(DeltaX) + "); R: (" + String(MotorRSpeed) + "); L: (" + String(MotorLSpeed) + ")");
 }
