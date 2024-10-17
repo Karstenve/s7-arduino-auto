@@ -14,10 +14,10 @@
 // Brake: LOW is not applied, HIGH is applied
 
 // Motor A Constants
-int MotorASpeed = 0;
+int MotorASpeed = 145;
 
 // Motor B Constants
-int MotorBSpeed = 0;
+int MotorBSpeed = 145;
 
 // Init Pixy cam 
 Pixy2 pixy;
@@ -46,13 +46,13 @@ void setup()
   analogWrite(MotorBSpeedPin, MotorBSpeed);
 
   // Init Pixy
-  //pixy.init();
-  //pixy.setLamp(1, 1);
+  pixy.init();
+  pixy.setLamp(1, 1);
 }
 
 void loop()
 {
-/*
+
   // Get Pixy vector
   pixy.line.getAllFeatures(1,true);
 
@@ -70,5 +70,5 @@ void loop()
 
   // Print Pixy vector coordinates
   Serial.println("Arrow Side: (" + String(ArrowSideX) + "," + String(ArrowSideY) + "); Line Side: (" + String(LineSideX) + "," + String(LineSideY) + ")");
-  */
+
 }
