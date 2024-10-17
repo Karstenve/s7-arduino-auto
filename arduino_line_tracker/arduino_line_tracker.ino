@@ -54,7 +54,7 @@ void loop()
 {
 
   // Get Pixy vector
-  pixy.line.getAllFeatures(1,true);
+  pixy.line.getMainFeatures(1,true);
 
   // Arrow side = positive side of the vector
   // Line side = negative side of the vector
