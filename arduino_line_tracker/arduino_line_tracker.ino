@@ -15,13 +15,9 @@
 
 // Motor A Constants
 int MotorASpeed = 0;
-int MotorADirection = HIGH;
-int MotorABrake = LOW;
 
 // Motor B Constants
 int MotorBSpeed = 0;
-int MotorBDirection = HIGH;
-int MotorBBrake = LOW;
 
 // Init Pixy cam 
 Pixy2 pixy;
@@ -74,4 +70,5 @@ void loop()
 
   // Print Pixy vector coordinates
   Serial.println("Arrow Side: (" + String(ArrowSideX) + "," + String(ArrowSideY) + "); Line Side: (" + String(LineSideX) + "," + String(LineSideY) + ")");
+  */
 }
