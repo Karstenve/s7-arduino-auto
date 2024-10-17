@@ -10,11 +10,12 @@
 // Direction: High is forwards, LOW is reverse
 // Brake: LOW is not applied, HIGH is applied
 
-int MaxSpeed = 100;
+int MaxSpeed = 125;
 int MinSpeed = 0;
 int MaxDelta = 5000;
 int Kp = 10;
 int Deadzone = 0;
+int offset = 10;
 
 // Init speed
 int MotorRSpeed = MaxSpeed;
@@ -55,6 +56,7 @@ void loop()
 {
   // Get Pixy vector
   pixy.line.getMainFeatures(1,true);
+  int numVectors = pixy.line.numVectors;
 
   // Arrow side = positive side of the vector
   // Line side = negative side of the vector
@@ -66,7 +68,7 @@ void loop()
   LineSideY = pixy.line.vectors -> m_y1;
 
   // Delta X position between arrow side and line side times a scaling coefficient
-  DeltaX = (LineSideX - ArrowSideX) * Kp;
+  DeltaX = (ArrowSideX - 38) * Kp;
 
   // Maxdelta limits
   if (DeltaX > MaxDelta | DeltaX < (-1 * MaxDelta)) {
@@ -90,6 +92,11 @@ void loop()
     MotorLSpeed = MaxSpeed;
   }
 
+  if (numVectors == 0) {
+    MotorRSpeed = MaxSpeed;
+    MotorLSpeed = MaxSpeed;
+  }
+
   // Right speed minimum
   if (MotorRSpeed < MinSpeed) {
     MotorRSpeed = MinSpeed;
@@ -104,5 +111,6 @@ void loop()
   analogWrite(MotorRSpeedPin, MotorRSpeed);
   analogWrite(MotorLSpeedPin, MotorLSpeed);
 
-  Serial.println("Delta: (" + String(DeltaX) + "); R: (" + String(MotorRSpeed) + "); L: (" + String(MotorLSpeed) + ")");
+  // Serial.println("Delta: (" + String(DeltaX) + "); R: (" + String(MotorRSpeed) + "); L: (" + String(MotorLSpeed) + ")");
+  Serial.println(DeltaX);
 }
